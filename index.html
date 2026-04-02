@@ -1,440 +1,360 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vineyard 实习生入职管理系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"
+      }
+    }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        :root { --purple: #534AB7; --teal: #1D9E75; --bg: #F7F6F2; }
+        body { font-family: 'Nunito', sans-serif; background: var(--bg); color: #1a1a1a; margin: 0; }
+        [v-cloak] { display: none; }
+        .hero-gradient { background: linear-gradient(145deg, #EEEDFE, #E1F5EE 55%, #FBEAF0); }
+        .pre-wrap { white-space: pre-wrap; word-break: break-word; }
+        .task-card { transition: all 0.2s ease; border-bottom: 1px solid #f0f0f0; }
+        .icon-wrapper { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="zh-CN"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Vineyard 实习生入职管理系统&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="importmap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"imports": {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>"firebase/app": "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js",</p>
-<p class="p1"><span class="Apple-converted-space">        </span>"firebase/auth": "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js",</p>
-<p class="p1"><span class="Apple-converted-space">        </span>"firebase/firestore": "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>:root { --purple: #534AB7; --teal: #1D9E75; --bg: #F7F6F2; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Nunito', sans-serif; background: var(--bg); color: #1a1a1a; margin: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>[v-cloak] { display: none; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hero-gradient { background: linear-gradient(145deg, #EEEDFE, #E1F5EE 55%, #FBEAF0); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.pre-wrap { white-space: pre-wrap; word-break: break-word; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.task-card { transition: all 0.2s ease; border-bottom: 1px solid #f0f0f0; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.icon-wrapper { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="app" v-cloak&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 加载状态 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div v-if="loading" class="min-h-screen flex flex-col items-center justify-center bg-white"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="animate-spin text-5xl mb-4"&gt;🍇&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-[#534AB7] font-black tracking-widest animate-pulse uppercase"&gt;Connecting to Vineyard...&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 登录视图 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div v-else-if="view === 'login'" class="min-h-screen hero-gradient flex items-center justify-center p-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white rounded-[3rem] p-10 w-full max-w-sm shadow-2xl text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-6xl mb-6"&gt;🍇&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="text-3xl font-black text-[#3C3489] mb-2"&gt;Vineyard Portal&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-gray-400 font-bold mb-10 italic"&gt;Welcome to the Academy&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button @click="showRoleModal('intern')" class="w-full p-6 rounded-3xl border-2 border-gray-100 hover:border-[#534AB7] hover:bg-[#EEEDFE] transition-all text-left flex items-center gap-4 group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-12 h-12 bg-[#EEEDFE] rounded-2xl flex items-center justify-center text-2xl"&gt;🐣&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="font-black text-lg"&gt;我是新员工&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button @click="showRoleModal('admin')" class="w-full p-6 rounded-3xl border-2 border-gray-100 hover:border-[#1D9E75] hover:bg-[#E1F5EE] transition-all text-left flex items-center gap-4 group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-2xl"&gt;🔑&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="font-black text-lg"&gt;我是管理员&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 角色登录弹窗 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div v-if="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white rounded-[2.5rem] p-8 w-full max-w-xs shadow-2xl relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;button @click="loginModal = false" class="absolute top-6 right-6 text-gray-300 hover:text-gray-600"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="icon-wrapper"&gt;&lt;i data-lucide="x"&gt;&lt;/i&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-black mb-6 text-center"&gt;验证身份&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;input v-if="targetRole === 'intern'" v-model="loginData.name" @keyup.enter="handleLogin" placeholder="请输入您的姓名" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl mb-4 focus:border-[#534AB7] outline-none font-bold text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;input v-if="targetRole === 'admin'" v-model="loginData.pass" @keyup.enter="handleLogin" type="password" placeholder="管理密码" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl mb-4 focus:border-[#1D9E75] outline-none font-bold text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;button @click="handleLogin" class="w-full py-4 bg-[#3C3489] text-white rounded-2xl font-black shadow-lg"&gt;确认进入 🚀&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 任务详情弹窗 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div v-if="selectedTask" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-end sm:items-center justify-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white w-full max-w-xl rounded-t-[3rem] sm:rounded-[3rem] p-8 max-h-[90vh] overflow-y-auto relative shadow-2xl"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;button @click="selectedTask = null" class="absolute top-8 right-8 text-gray-400 hover:text-gray-900 bg-gray-50 p-2 rounded-full"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="icon-wrapper"&gt;&lt;i data-lucide="x"&gt;&lt;/i&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span :class="getTagStyle(selectedTask.category)" class="text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{{ selectedTask.category }}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-3xl font-black text-[#3C3489] pr-10"&gt;{{ selectedTask.title }}&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="prose prose-indigo max-w-none mb-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-gray-600 font-medium leading-relaxed pre-wrap"&gt;{{ selectedTask.description || '暂无详细说明' }}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;button @click="toggleTaskStatus(selectedTask); selectedTask = null" class="w-full py-5 rounded-[2rem] font-black text-white shadow-xl transition-all" :class="taskStatuses[selectedTask.id] ? 'bg-gray-400' : 'bg-[#534AB7] hover:scale-[1.02] active:scale-95'"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{{ taskStatuses[selectedTask.id] ? '标记为未完成' : '我已完成此项任务 ✅' }}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 实习生主界面 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div v-else-if="view === 'intern'" class="min-h-screen"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 px-6 py-5 flex justify-between items-center border-b border-gray-50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center gap-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-2xl"&gt;🍇&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="font-black text-[#3C3489] tracking-tight uppercase"&gt;Vineyard Onboarding&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div @click="logout" class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 cursor-pointer hover:bg-red-50 hover:text-red-400"&gt;🚪&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;main class="max-w-xl mx-auto p-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="hero-gradient rounded-[2.5rem] p-8 mb-6 shadow-sm border border-white"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-[#534AB7] font-black text-xs uppercase tracking-widest mb-1 opacity-60"&gt;Hello, {{ currentUser?.name }}!&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-2xl font-black text-[#3C3489] mb-4"&gt;欢迎加入 Vineyard！🌱&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-4xl font-black text-[#3C3489]"&gt;{{ internProgress }}%&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 h-3 bg-white/50 rounded-full overflow-hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="h-full bg-[#534AB7] transition-all duration-1000" :style="{width: internProgress + '%'}"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center justify-between mb-4 px-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-black text-gray-400 text-xs uppercase tracking-widest"&gt;入职清单&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex gap-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button v-for="cat in categories" @click="activeCat = cat" :class="activeCat === cat ? 'bg-[#3C3489] text-white' : 'bg-white text-gray-400'" class="px-3 py-1 rounded-full text-[10px] font-black transition-all"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>{{ cat === 'All' ? '全部' : cat }}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-white mb-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div v-for="task in filteredTasks" :key="task.id" @click="selectedTask = task" class="task-card p-6 flex items-center gap-5 cursor-pointer hover:bg-gray-50/50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div @click.stop="toggleTaskStatus(task)" :class="['w-8 h-8 rounded-xl border-2 flex items-center justify-center transition-all', taskStatuses[task.id] ? 'bg-[#1D9E75] border-[#1D9E75] text-white' : 'border-gray-100 bg-gray-50']"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;svg v-if="taskStatuses[task.id]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold" :class="taskStatuses[task.id] ? 'text-gray-400 line-through' : 'text-gray-800'"&gt;{{ task.title }}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span :class="getTagStyle(task.category)" class="text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-tighter mt-1 inline-block"&gt;{{ task.category }}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="icon-wrapper text-gray-300"&gt;&lt;i data-lucide="chevron-right"&gt;&lt;/i&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div v-if="filteredTasks.length === 0" class="p-10 text-center text-gray-400 font-bold italic"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>这里还没有任务哦~</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 管理员主界面 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div v-else-if="view === 'admin'" class="min-h-screen flex bg-gray-50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;aside class="w-72 bg-white border-r border-gray-100 flex flex-col sticky top-0 h-screen"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="p-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-3 mb-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-3xl"&gt;🍇&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="font-black text-xl tracking-tighter"&gt;Admin Portal&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;nav class="space-y-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button v-for="tab in ['dashboard', 'tasks']" @click="adminTab = tab" :class="adminTab === tab ? 'bg-[#EEEDFE] text-[#534AB7]' : 'text-gray-400 hover:bg-gray-50'" class="w-full p-4 rounded-2xl flex items-center gap-4 font-black transition-all"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="icon-wrapper"&gt;&lt;i :data-lucide="tab === 'dashboard' ? 'layout-dashboard' : 'list-checks'"&gt;&lt;/i&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>{{ tab === 'dashboard' ? '入职进度' : '任务管理' }}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mt-auto p-8 border-t border-gray-50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button @click="logout" class="w-full p-4 text-gray-400 font-bold hover:text-red-500 transition-colors flex items-center gap-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="icon-wrapper"&gt;&lt;i data-lucide="log-out"&gt;&lt;/i&gt;&lt;/span&gt; 退出管理系统</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/aside&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;main class="flex-1 p-12 overflow-y-auto"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div v-if="adminTab === 'dashboard'"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-center mb-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-4xl font-black text-[#3C3489]"&gt;所有实习生进度&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-xs font-bold text-gray-400"&gt;实时数据同步已开启&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 lg:grid-cols-2 gap-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div v-for="intern in interns" :key="intern.id" class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-white flex flex-col gap-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex justify-between items-start"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h4 class="text-xl font-black text-gray-800"&gt;{{ intern.name }}&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-xs font-bold text-gray-400 mt-1 uppercase tracking-widest"&gt;ID: {{ intern.id }}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="bg-[#EEEDFE] text-[#534AB7] px-4 py-2 rounded-2xl font-black"&gt;{{ getInternPercent(intern.id) }}%&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-full h-3 bg-gray-50 rounded-full overflow-hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="h-full bg-[#534AB7]" :style="{width: getInternPercent(intern.id) + '%'}"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-[10px] text-gray-300"&gt;最后活跃: {{ formatDate(intern.lastSeen) }}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div v-if="interns.length === 0" class="col-span-full p-20 text-center bg-white rounded-[3rem] text-gray-300 font-bold italic"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>还没有实习生登录过系统</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div v-if="adminTab === 'tasks'"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-center mb-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-4xl font-black text-[#3C3489]"&gt;任务管理&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button @click="showAddTask = true" class="bg-[#1D9E75] text-white px-8 py-4 rounded-2xl font-black shadow-lg hover:scale-105 transition-transform"&gt;＋ 新建任务&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div v-if="showAddTask" class="bg-[#EEEDFE] p-8 rounded-[2.5rem] mb-10 border-2 border-white shadow-xl"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="grid grid-cols-2 gap-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="col-span-2 md:col-span-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label class="block text-[10px] font-black text-[#534AB7] uppercase mb-2 ml-2"&gt;任务标题&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input v-model="newTask.title" placeholder="例如：领取工牌" class="w-full p-4 rounded-2xl outline-none focus:ring-2 ring-[#534AB7]"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="col-span-2 md:col-span-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label class="block text-[10px] font-black text-[#534AB7] uppercase mb-2 ml-2"&gt;所属部门&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;select v-model="newTask.category" class="w-full p-4 rounded-2xl outline-none"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;option v-for="c in categories.filter(x =&gt; x!=='All')" :value="c"&gt;{{ c }}&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="col-span-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;label class="block text-[10px] font-black text-[#534AB7] uppercase mb-2 ml-2"&gt;详细指南&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;textarea v-model="newTask.description" placeholder="请输入详细的办理步骤和注意事项..." class="w-full p-4 rounded-2xl outline-none min-h-[120px]"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="mt-6 flex gap-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button @click="addTask" class="bg-[#534AB7] text-white px-10 py-4 rounded-2xl font-black shadow-lg"&gt;确认保存&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button @click="showAddTask = false" class="text-gray-400 font-bold px-6"&gt;取消&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-white"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div v-for="task in tasks" :key="task.id" class="p-6 border-b border-gray-50 flex justify-between items-center hover:bg-gray-50/50 transition"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center gap-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 font-black"&gt;#&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="font-bold text-gray-800"&gt;{{ task.title }}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div :class="getTagStyle(task.category)" class="text-[9px] font-black px-2 py-0.5 rounded-md uppercase tracking-widest mt-1 inline-block"&gt;{{ task.category }}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button @click="deleteTask(task.id)" class="text-red-100 hover:text-red-500 transition-colors p-3 hover:bg-red-50 rounded-xl"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="icon-wrapper"&gt;&lt;i data-lucide="trash-2"&gt;&lt;/i&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div v-if="tasks.length === 0" class="p-20 text-center text-gray-300 font-bold italic"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>暂无任务，请点击上方按钮添加。</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="module"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>import { initializeApp } from 'firebase/app';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>import { getFirestore, doc, collection, onSnapshot, setDoc, updateDoc, deleteDoc, addDoc, query, orderBy } from 'firebase/firestore';</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const { createApp, ref, computed, onMounted, nextTick } = Vue;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- Firebase 存档配置 ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const firebaseConfig = {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>apiKey: "AIzaSyC2xOsELfgL6b9oHotZPJvU59n-dtZSm78",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>authDomain: "onboard-f41fa.firebaseapp.com",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>databaseURL: "https://onboard-f41fa-default-rtdb.asia-southeast1.firebasedatabase.app",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>projectId: "onboard-f41fa",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>storageBucket: "onboard-f41fa.firebasestorage.app",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>messagingSenderId: "622185207810",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>appId: "1:622185207810:web:d53fd5a969622510bb6f1b"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const appId = 'vineyard-v4-prod';</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>createApp({</p>
-<p class="p1"><span class="Apple-converted-space">            </span>setup() {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const loading = ref(true);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const view = ref('login');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const adminTab = ref('dashboard');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const currentUser = ref(null);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const loginModal = ref(false);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const targetRole = ref('');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const loginData = ref({ name: '', pass: '' });</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const tasks = ref([]);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const interns = ref([]);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const taskStatuses = ref({});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const selectedTask = ref(null);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const showAddTask = ref(false);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const activeCat = ref('All');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const categories = ['All', '教学部', '教务部', '行政部'];</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const newTask = ref({ title: '', category: '教学部', description: '' });</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>let db, auth;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const refreshIcons = () =&gt; nextTick(() =&gt; { if (window.lucide) window.lucide.createIcons(); });</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>onMounted(async () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const app = initializeApp(firebaseConfig);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>auth = getAuth(app);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>db = getFirestore(app);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>await signInAnonymously(auth);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>} catch (err) {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>console.error("Firebase Init Error", err);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>onAuthStateChanged(auth, (user) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (user) {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>startSyncing();</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>checkSession();</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const startSyncing = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>// 同步任务</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const tasksRef = collection(db, 'artifacts', appId, 'public', 'data', 'tasks');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>onSnapshot(tasksRef, (snap) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>tasks.value = snap.docs.map(d =&gt; ({ id: d.id, ...d.data() }));</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>refreshIcons();</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}, (err) =&gt; console.error("Tasks Sync Error:", err));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>// 同步实习生</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const internsRef = collection(db, 'artifacts', appId, 'public', 'data', 'interns');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>onSnapshot(internsRef, (snap) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>interns.value = snap.docs.map(d =&gt; ({ id: d.id, ...d.data() }));</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>refreshIcons();</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}, (err) =&gt; console.error("Interns Sync Error:", err));</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const checkSession = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const saved = localStorage.getItem('vineyard_session_v4');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (saved) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const data = JSON.parse(saved);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>currentUser.value = data;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>view.value = data.role;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (data.role === 'intern') syncMyProgress(data.id);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>loading.value = false;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>refreshIcons();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const syncMyProgress = (internId) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const internDoc = doc(db, 'artifacts', appId, 'public', 'data', 'interns', internId);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>onSnapshot(internDoc, (snap) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (snap.exists()) {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>const finished = snap.data().finished || [];</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>const map = {};</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>finished.forEach(id =&gt; map[id] = true);</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>taskStatuses.value = map;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const handleLogin = async () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (targetRole.value === 'admin') {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (loginData.value.pass === '666') {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>currentUser.value = { role: 'admin', name: 'Admin' };</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>view.value = 'admin';</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>localStorage.setItem('vineyard_session_v4', JSON.stringify(currentUser.value));</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>loginModal.value = false;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>} else alert("密码错误");</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const name = loginData.value.name.trim();</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (!name) return;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const internDoc = doc(db, 'artifacts', appId, 'public', 'data', 'interns', name);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>await setDoc(internDoc, { name: name, lastSeen: Date.now() }, { merge: true });</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>currentUser.value = { role: 'intern', name: name, id: name };</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>view.value = 'intern';</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>localStorage.setItem('vineyard_session_v4', JSON.stringify(currentUser.value));</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>loginModal.value = false;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>syncMyProgress(name);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>refreshIcons();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const toggleTaskStatus = async (task) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const next = !taskStatuses.value[task.id];</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>taskStatuses.value[task.id] = next;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const finishedIds = Object.keys(taskStatuses.value).filter(id =&gt; taskStatuses.value[id]);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const internDoc = doc(db, 'artifacts', appId, 'public', 'data', 'interns', currentUser.value.id);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>await updateDoc(internDoc, { finished: finishedIds, lastSeen: Date.now() });</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const addTask = async () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (!newTask.value.title) return;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const tasksCol = collection(db, 'artifacts', appId, 'public', 'data', 'tasks');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>await addDoc(tasksCol, { ...newTask.value, createdAt: Date.now() });</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>newTask.value = { title: '', category: '教学部', description: '' };</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>showAddTask.value = false;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const deleteTask = async (id) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tasks', id));</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const logout = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>localStorage.removeItem('vineyard_session_v4');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>view.value = 'login';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>currentUser.value = null;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>refreshIcons();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const filteredTasks = computed(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (activeCat.value === 'All') return tasks.value;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return tasks.value.filter(t =&gt; t.category === activeCat.value);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const internProgress = computed(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (!tasks.value.length) return 0;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const doneCount = Object.values(taskStatuses.value).filter(Boolean).length;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return Math.round((doneCount / tasks.value.length) * 100);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const getInternPercent = (id) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const i = interns.value.find(x =&gt; x.id === id);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (!i || !tasks.value.length) return 0;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return Math.round(((i.finished || []).length / tasks.value.length) * 100);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const getTagStyle = (cat) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (cat === '教学部') return 'bg-purple-100 text-[#534AB7] border-purple-200';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (cat === '教务部') return 'bg-green-100 text-[#1D9E75] border-green-200';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (cat === '行政部') return 'bg-orange-100 text-orange-600 border-orange-200';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return 'bg-gray-100 text-gray-400 border-gray-200';</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const formatDate = (ts) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (!ts) return '从未';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return new Date(ts).toLocaleString();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>return {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>loading, view, adminTab, currentUser, loginModal, targetRole, loginData,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>tasks, interns, taskStatuses, selectedTask, showAddTask, newTask,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories, activeCat, filteredTasks, internProgress,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>showRoleModal: (r) =&gt; { targetRole.value = r; loginModal.value = true; refreshIcons(); },</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>handleLogin, logout, toggleTaskStatus, addTask, deleteTask, getInternPercent, getTagStyle, formatDate</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}).mount('#app');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div id="app" v-cloak>
+        <!-- 加载状态 -->
+        <div v-if="loading" class="min-h-screen flex flex-col items-center justify-center bg-white">
+            <div class="animate-spin text-5xl mb-4">🍇</div>
+            <p class="text-[#534AB7] font-black tracking-widest animate-pulse uppercase">Connecting to Vineyard...</p>
+        </div>
+
+        <!-- 登录视图 -->
+        <div v-else-if="view === 'login'" class="min-h-screen hero-gradient flex items-center justify-center p-6">
+            <div class="bg-white rounded-[3rem] p-10 w-full max-w-sm shadow-2xl text-center">
+                <div class="text-6xl mb-6">🍇</div>
+                <h1 class="text-3xl font-black text-[#3C3489] mb-2">Vineyard Portal</h1>
+                <p class="text-gray-400 font-bold mb-10 italic">Welcome to the Academy</p>
+                <div class="space-y-4">
+                    <button @click="showRoleModal('intern')" class="w-full p-6 rounded-3xl border-2 border-gray-100 hover:border-[#534AB7] hover:bg-[#EEEDFE] transition-all text-left flex items-center gap-4 group">
+                        <div class="w-12 h-12 bg-[#EEEDFE] rounded-2xl flex items-center justify-center text-2xl">🐣</div>
+                        <span class="font-black text-lg">我是新员工</span>
+                    </button>
+                    <button @click="showRoleModal('admin')" class="w-full p-6 rounded-3xl border-2 border-gray-100 hover:border-[#1D9E75] hover:bg-[#E1F5EE] transition-all text-left flex items-center gap-4 group">
+                        <div class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-2xl">🔑</div>
+                        <span class="font-black text-lg">我是管理员</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 角色登录弹窗 -->
+        <div v-if="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+            <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-xs shadow-2xl relative">
+                <button @click="loginModal = false" class="absolute top-6 right-6 text-gray-300 hover:text-gray-600">
+                    <span class="icon-wrapper"><i data-lucide="x"></i></span>
+                </button>
+                <h2 class="text-2xl font-black mb-6 text-center">验证身份</h2>
+                <input v-if="targetRole === 'intern'" v-model="loginData.name" @keyup.enter="handleLogin" placeholder="请输入您的姓名" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl mb-4 focus:border-[#534AB7] outline-none font-bold text-center">
+                <input v-if="targetRole === 'admin'" v-model="loginData.pass" @keyup.enter="handleLogin" type="password" placeholder="管理密码" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl mb-4 focus:border-[#1D9E75] outline-none font-bold text-center">
+                <button @click="handleLogin" class="w-full py-4 bg-[#3C3489] text-white rounded-2xl font-black shadow-lg">确认进入 🚀</button>
+            </div>
+        </div>
+
+        <!-- 任务详情弹窗 -->
+        <div v-if="selectedTask" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-end sm:items-center justify-center">
+            <div class="bg-white w-full max-w-xl rounded-t-[3rem] sm:rounded-[3rem] p-8 max-h-[90vh] overflow-y-auto relative shadow-2xl">
+                <button @click="selectedTask = null" class="absolute top-8 right-8 text-gray-400 hover:text-gray-900 bg-gray-50 p-2 rounded-full">
+                    <span class="icon-wrapper"><i data-lucide="x"></i></span>
+                </button>
+                <div class="mb-6">
+                    <span :class="getTagStyle(selectedTask.category)" class="text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">
+                        {{ selectedTask.category }}
+                    </span>
+                    <h2 class="text-3xl font-black text-[#3C3489] pr-10">{{ selectedTask.title }}</h2>
+                </div>
+                <div class="prose prose-indigo max-w-none mb-10">
+                    <p class="text-gray-600 font-medium leading-relaxed pre-wrap">{{ selectedTask.description || '暂无详细说明' }}</p>
+                </div>
+                <button @click="toggleTaskStatus(selectedTask); selectedTask = null" class="w-full py-5 rounded-[2rem] font-black text-white shadow-xl transition-all" :class="taskStatuses[selectedTask.id] ? 'bg-gray-400' : 'bg-[#534AB7] hover:scale-[1.02] active:scale-95'">
+                    {{ taskStatuses[selectedTask.id] ? '标记为未完成' : '我已完成此项任务 ✅' }}
+                </button>
+            </div>
+        </div>
+
+        <!-- 实习生主界面 -->
+        <div v-else-if="view === 'intern'" class="min-h-screen">
+            <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 px-6 py-5 flex justify-between items-center border-b border-gray-50">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🍇</span>
+                    <span class="font-black text-[#3C3489] tracking-tight uppercase">Vineyard Onboarding</span>
+                </div>
+                <div @click="logout" class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 cursor-pointer hover:bg-red-50 hover:text-red-400">🚪</div>
+            </header>
+
+            <main class="max-w-xl mx-auto p-6">
+                <div class="hero-gradient rounded-[2.5rem] p-8 mb-6 shadow-sm border border-white">
+                    <p class="text-[#534AB7] font-black text-xs uppercase tracking-widest mb-1 opacity-60">Hello, {{ currentUser?.name }}!</p>
+                    <h2 class="text-2xl font-black text-[#3C3489] mb-4">欢迎加入 Vineyard！🌱</h2>
+                    <div class="flex items-center gap-4">
+                        <div class="text-4xl font-black text-[#3C3489]">{{ internProgress }}%</div>
+                        <div class="flex-1 h-3 bg-white/50 rounded-full overflow-hidden">
+                            <div class="h-full bg-[#534AB7] transition-all duration-1000" :style="{width: internProgress + '%'}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <h3 class="font-black text-gray-400 text-xs uppercase tracking-widest">入职清单</h3>
+                    <div class="flex gap-2">
+                        <button v-for="cat in categories" @click="activeCat = cat" :class="activeCat === cat ? 'bg-[#3C3489] text-white' : 'bg-white text-gray-400'" class="px-3 py-1 rounded-full text-[10px] font-black transition-all">
+                            {{ cat === 'All' ? '全部' : cat }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-white mb-10">
+                    <div v-for="task in filteredTasks" :key="task.id" @click="selectedTask = task" class="task-card p-6 flex items-center gap-5 cursor-pointer hover:bg-gray-50/50">
+                        <div @click.stop="toggleTaskStatus(task)" :class="['w-8 h-8 rounded-xl border-2 flex items-center justify-center transition-all', taskStatuses[task.id] ? 'bg-[#1D9E75] border-[#1D9E75] text-white' : 'border-gray-100 bg-gray-50']">
+                            <svg v-if="taskStatuses[task.id]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-bold" :class="taskStatuses[task.id] ? 'text-gray-400 line-through' : 'text-gray-800'">{{ task.title }}</div>
+                            <span :class="getTagStyle(task.category)" class="text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-tighter mt-1 inline-block">{{ task.category }}</span>
+                        </div>
+                        <span class="icon-wrapper text-gray-300"><i data-lucide="chevron-right"></i></span>
+                    </div>
+                    <div v-if="filteredTasks.length === 0" class="p-10 text-center text-gray-400 font-bold italic">
+                        这里还没有任务哦~
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- 管理员主界面 -->
+        <div v-else-if="view === 'admin'" class="min-h-screen flex bg-gray-50">
+            <aside class="w-72 bg-white border-r border-gray-100 flex flex-col sticky top-0 h-screen">
+                <div class="p-8">
+                    <div class="flex items-center gap-3 mb-10">
+                        <span class="text-3xl">🍇</span>
+                        <span class="font-black text-xl tracking-tighter">Admin Portal</span>
+                    </div>
+                    <nav class="space-y-2">
+                        <button v-for="tab in ['dashboard', 'tasks']" @click="adminTab = tab" :class="adminTab === tab ? 'bg-[#EEEDFE] text-[#534AB7]' : 'text-gray-400 hover:bg-gray-50'" class="w-full p-4 rounded-2xl flex items-center gap-4 font-black transition-all">
+                            <span class="icon-wrapper"><i :data-lucide="tab === 'dashboard' ? 'layout-dashboard' : 'list-checks'"></i></span>
+                            {{ tab === 'dashboard' ? '入职进度' : '任务管理' }}
+                        </button>
+                    </nav>
+                </div>
+                <div class="mt-auto p-8 border-t border-gray-50">
+                    <button @click="logout" class="w-full p-4 text-gray-400 font-bold hover:text-red-500 transition-colors flex items-center gap-3">
+                        <span class="icon-wrapper"><i data-lucide="log-out"></i></span> 退出管理系统
+                    </button>
+                </div>
+            </aside>
+            <main class="flex-1 p-12 overflow-y-auto">
+                <div v-if="adminTab === 'dashboard'">
+                    <div class="flex justify-between items-center mb-10">
+                        <h2 class="text-4xl font-black text-[#3C3489]">所有实习生进度</h2>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div v-for="intern in interns" :key="intern.id" class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-white flex flex-col gap-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-xl font-black text-gray-800">{{ intern.name }}</h4>
+                                    <p class="text-xs font-bold text-gray-400 mt-1 uppercase tracking-widest">ID: {{ intern.id }}</p>
+                                </div>
+                                <div class="bg-[#EEEDFE] text-[#534AB7] px-4 py-2 rounded-2xl font-black">{{ getInternPercent(intern.id) }}%</div>
+                            </div>
+                            <div class="w-full h-3 bg-gray-50 rounded-full overflow-hidden">
+                                <div class="h-full bg-[#534AB7]" :style="{width: getInternPercent(intern.id) + '%'}"></div>
+                            </div>
+                            <p class="text-[10px] text-gray-300">最后活跃: {{ formatDate(intern.lastSeen) }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="adminTab === 'tasks'">
+                    <div class="flex justify-between items-center mb-10">
+                        <h2 class="text-4xl font-black text-[#3C3489]">任务管理</h2>
+                        <button @click="showAddTask = true" class="bg-[#1D9E75] text-white px-8 py-4 rounded-2xl font-black shadow-lg">＋ 新建任务</button>
+                    </div>
+                    <div v-if="showAddTask" class="bg-[#EEEDFE] p-8 rounded-[2.5rem] mb-10 border-2 border-white shadow-xl">
+                        <!-- 添加任务表单... -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <input v-model="newTask.title" placeholder="任务标题" class="p-4 rounded-2xl">
+                            <select v-model="newTask.category" class="p-4 rounded-2xl">
+                                <option v-for="c in categories.filter(x=>x!=='All')" :value="c">{{c}}</option>
+                            </select>
+                            <textarea v-model="newTask.description" placeholder="任务详情说明..." class="col-span-2 p-4 rounded-2xl min-h-[100px]"></textarea>
+                        </div>
+                        <div class="mt-4 flex gap-4">
+                            <button @click="addTask" class="bg-[#534AB7] text-white px-6 py-3 rounded-xl font-black">保存任务</button>
+                            <button @click="showAddTask = false" class="text-gray-400">取消</button>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-white">
+                        <div v-for="task in tasks" :key="task.id" class="p-6 border-b border-gray-50 flex justify-between items-center">
+                            <div>
+                                <div class="font-bold text-gray-800">{{ task.title }}</div>
+                                <div :class="getTagStyle(task.category)" class="text-[9px] font-black px-2 py-0.5 rounded-md uppercase tracking-widest mt-1 inline-block">{{ task.category }}</div>
+                            </div>
+                            <button @click="deleteTask(task.id)" class="text-red-100 hover:text-red-500 p-2"><span class="icon-wrapper"><i data-lucide="trash-2"></i></span></button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'firebase/app';
+        import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+        import { getFirestore, doc, collection, onSnapshot, setDoc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore';
+
+        const { createApp, ref, computed, onMounted, nextTick } = Vue;
+
+        // 注意：这是你专属的 Firebase 生产环境密钥
+        const firebaseConfig = {
+            apiKey: "AIzaSyC2xOsELfgL6b9oHotZPJvU59n-dtZSm78",
+            authDomain: "onboard-f41fa.firebaseapp.com",
+            databaseURL: "https://onboard-f41fa-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "onboard-f41fa",
+            storageBucket: "onboard-f41fa.firebasestorage.app",
+            messagingSenderId: "622185207810",
+            appId: "1:622185207810:web:d53fd5a969622510bb6f1b"
+        };
+        const appId = 'vineyard-v4-prod';
+
+        createApp({
+            setup() {
+                const loading = ref(true);
+                const view = ref('login');
+                const adminTab = ref('dashboard');
+                const currentUser = ref(null);
+                const loginModal = ref(false);
+                const targetRole = ref('');
+                const loginData = ref({ name: '', pass: '' });
+                const tasks = ref([]);
+                const interns = ref([]);
+                const taskStatuses = ref({});
+                const selectedTask = ref(null);
+                const showAddTask = ref(false);
+                const activeCat = ref('All');
+                const categories = ['All', '教学部', '教务部', '行政部'];
+                const newTask = ref({ title: '', category: '教学部', description: '' });
+
+                let db, auth;
+                const refreshIcons = () => nextTick(() => { if (window.lucide) window.lucide.createIcons(); });
+
+                onMounted(async () => {
+                    const app = initializeApp(firebaseConfig);
+                    auth = getAuth(app);
+                    db = getFirestore(app);
+                    await signInAnonymously(auth);
+                    onAuthStateChanged(auth, (user) => {
+                        if (user) {
+                            startSyncing();
+                            checkSession();
+                        }
+                    });
+                });
+
+                const startSyncing = () => {
+                    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'tasks'), (snap) => {
+                        tasks.value = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                        refreshIcons();
+                    });
+                    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'interns'), (snap) => {
+                        interns.value = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                        refreshIcons();
+                    });
+                };
+
+                const checkSession = () => {
+                    const saved = localStorage.getItem('vineyard_session_v4');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        currentUser.value = data;
+                        view.value = data.role;
+                        if (data.role === 'intern') syncMyProgress(data.id);
+                    }
+                    loading.value = false;
+                    refreshIcons();
+                };
+
+                const syncMyProgress = (internId) => {
+                    onSnapshot(doc(db, 'artifacts', appId, 'public', 'data', 'interns', internId), (snap) => {
+                        if (snap.exists()) {
+                            const map = {};
+                            (snap.data().finished || []).forEach(id => map[id] = true);
+                            taskStatuses.value = map;
+                        }
+                    });
+                };
+
+                const handleLogin = async () => {
+                    if (targetRole.value === 'admin') {
+                        if (loginData.value.pass === '666') {
+                            currentUser.value = { role: 'admin', name: 'Admin' };
+                            view.value = 'admin';
+                            localStorage.setItem('vineyard_session_v4', JSON.stringify(currentUser.value));
+                        } else alert("密码错误");
+                    } else {
+                        const name = loginData.value.name.trim();
+                        if (!name) return;
+                        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'interns', name), { name, lastSeen: Date.now() }, { merge: true });
+                        currentUser.value = { role: 'intern', name: name, id: name };
+                        view.value = 'intern';
+                        localStorage.setItem('vineyard_session_v4', JSON.stringify(currentUser.value));
+                        syncMyProgress(name);
+                    }
+                    loginModal.value = false;
+                    refreshIcons();
+                };
+
+                const toggleTaskStatus = async (task) => {
+                    taskStatuses.value[task.id] = !taskStatuses.value[task.id];
+                    const finished = Object.keys(taskStatuses.value).filter(id => taskStatuses.value[id]);
+                    await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'interns', currentUser.value.id), { finished, lastSeen: Date.now() });
+                };
+
+                const addTask = async () => {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tasks'), { ...newTask.value, createdAt: Date.now() });
+                    showAddTask.value = false;
+                };
+
+                const deleteTask = async (id) => {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tasks', id));
+                };
+
+                const logout = () => {
+                    localStorage.removeItem('vineyard_session_v4');
+                    location.reload();
+                };
+
+                const filteredTasks = computed(() => activeCat.value === 'All' ? tasks.value : tasks.value.filter(t => t.category === activeCat.value));
+                const internProgress = computed(() => tasks.value.length ? Math.round((Object.values(taskStatuses.value).filter(Boolean).length / tasks.value.length) * 100) : 0);
+                const getInternPercent = (id) => {
+                    const i = interns.value.find(x => x.id === id);
+                    return (i && tasks.value.length) ? Math.round(((i.finished || []).length / tasks.value.length) * 100) : 0;
+                };
+                const getTagStyle = (cat) => cat === '教学部' ? 'bg-purple-100 text-[#534AB7]' : cat === '教务部' ? 'bg-green-100 text-[#1D9E75]' : 'bg-orange-100 text-orange-600';
+
+                return {
+                    loading, view, adminTab, currentUser, loginModal, targetRole, loginData,
+                    tasks, interns, taskStatuses, selectedTask, showAddTask, newTask,
+                    categories, activeCat, filteredTasks, internProgress,
+                    showRoleModal: (r) => { targetRole.value = r; loginModal.value = true; refreshIcons(); },
+                    handleLogin, logout, toggleTaskStatus, addTask, deleteTask, getInternPercent, getTagStyle, formatDate: (ts) => ts ? new Date(ts).toLocaleString() : '从未'
+                };
+            }
+        }).mount('#app');
+    </script>
 </body>
 </html>
